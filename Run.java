@@ -13,7 +13,7 @@ public class Run{
         System.out.println("\n====== Así queda el tablero de jugador 2 ======\n");
         empezar.MostradorDeTableroFinal2();
         int puntos_jugador1 = empezar.CalculadorDePuntos1();
-        System.out.println("\n Puntaje P1: " + puntos_jugador1);
+        System.out.println("\nPuntaje P1: " + puntos_jugador1);
         int puntos_jugador2 = empezar.CalculadorDePuntos2();
         System.out.println("Puntaje P2: " + puntos_jugador2);
         if (puntos_jugador1>puntos_jugador2){
