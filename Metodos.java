@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Metodos{
@@ -26,8 +27,6 @@ public class Metodos{
     
     //Sirve para conseguir el dinosaurio ingresado
     public static String ConseguidorDeDinosaurio(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, String baraja){
-        Scanner in = new Scanner(System.in);
-        
         System.out.println("(1) Bosque de la semejanza: [" + zona1 + "]");
         System.out.println("(2) Prado de la diferencia: [" + zona2 + "]");
         System.out.println("(3) Pradera del amor: [" + zona3 + "]");
@@ -36,12 +35,133 @@ public class Metodos{
         System.out.println("(6) Isla solitaria: [" + zona6 + "]");
         System.out.println("(7) Rio: [" + zona7 + "]");
         System.out.println("Estos son sus dinosaurios: " + baraja);
-        System.out.println("¿Cuál desea colocar?: ");
-        char dino = in.next().charAt(0);
-        System.out.println("¿En cuál zona lo deasea colocar?: ");
-        char zona = in.next().charAt(0);
+        char dino = PreguntarDinosaurio(baraja);
+        char zona = PreguntarZona(zona1, zona2, zona3, zona4, zona5, zona6, zona7, dino);
         String DinoNuevo = "" + dino + zona;
         return DinoNuevo;
+    }
+    
+    public static char PreguntarZona(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, char dino){
+        Scanner in = new Scanner (System.in);
+        boolean continuar = false;
+        int entrada = 0;
+        do {
+            System.out.println("¿En cuál zona lo desea colocar?: ");
+            try {
+                entrada = in.nextInt();
+                if (entrada == 1){
+                    if (zona1.length() == 0){
+                        continuar = false;
+                    }
+                    else {
+                        if (zona1.length()>=6){
+                            System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                            continuar = true;
+                        }
+                        else {
+                            if (zona1.charAt(0) == dino){
+                                continuar = false;
+                            }
+                            else {
+                                System.out.println("Entrada inválida. El dinosaurio tiene que ser igual a los otros en la zona");
+                                continuar = true;
+                            }
+                        }
+                    }
+                }
+                else if (entrada == 2){
+                    if (zona2.length()>=6){
+                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                        continuar = true;
+                    }
+                    else {
+                        for (int i = 0; i<zona2.length(); i++){
+                            if (zona2.charAt(i)==dino){
+                                System.out.println("Entrada inválida. El dinosaurio no puede ser igual a los otros en la zona");
+                                continuar = true;
+                            }
+                        }
+                        continuar = false;
+                    }
+                }
+                else if (entrada == 3){
+                    if (zona3.length() > 6){
+                        continuar = false;
+                    }
+                    else {
+                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                        continuar = true;
+                    }
+                }
+                else if (entrada == 4){
+                    if (zona4.length() > 3){
+                        continuar = false;
+                    }
+                    else {
+                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                        continuar = true;
+                    }
+                }
+                else if (entrada == 5){
+                    if (zona5.length() == 0){
+                        continuar = false;
+                    }
+                    else {
+                        System.out.println("Entrada inválida. Ya hay un dinosaurio.");
+                        continuar = true;
+                    }
+                }
+                else if (entrada == 6){
+                    if (zona6.length() == 0){
+                        continuar = false;
+                    }
+                    else {
+                        System.out.println("Entrada inválida. Ya hay un dinosaurio.");
+                        continuar = true;
+                    }
+                }
+                else if (entrada == 7){
+                    continuar = false;
+                }
+                else {
+                    System.out.println("Entrada inválida. Ingrese una zona válida");
+                    continuar = true;
+                }
+            } catch (InputMismatchException error){
+                System.out.println("Entrada inválida. Ingrese un número");
+                continuar = true;
+            }
+        } while (continuar = true);
+        char devolver = (char) entrada;
+        return devolver;
+    }
+    
+    public static char PreguntarDinosaurio(String baraja){
+        Scanner in = new Scanner (System.in);
+        boolean continuar = false;
+        String entrada = "";
+        do{
+            System.out.println("¿Cuál desea colocar?: ");
+            entrada = in.nextLine();
+            if (entrada.length()>1){
+                System.out.println("Entrada inválida. Ingrese sólo un dinosaurio.");
+                continuar = true;
+            }
+            else if (entrada.length()<1){
+                System.out.println("Entrada inválida. Ingrese algún dinosaurio.");
+                continuar = true;
+            }
+            else if (entrada.length()==1){
+                for (int i = 0; i<baraja.length(); i++){
+                    if (baraja.charAt(i)==entrada.charAt(0)){
+                        continuar = false;
+                        break;
+                    }
+                }
+            }
+        } while (continuar = true);
+        char dinosaurio = entrada.charAt(0);
+        return dinosaurio;
     }
     
     //Más variables
@@ -207,58 +327,189 @@ public class Metodos{
         System.out.println("(7) Rio: [" + zona7_2 + "]");
     }
     
-    //condiciones para conseguir puntos
-    public int CalcularPuntajeZona1(String zona1){
-        int contador = 0;
-        boolean verificacion = true;
+    public static int ContadorDeDinosaurios(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, char dinosaurio){
+        int cantidad_de_dinosaurios = 0;
+        for (int i = 0; i<zona1.length(); i++){
+            if (zona1.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona2.length(); i++){
+            if (zona2.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona3.length(); i++){
+            if (zona3.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona4.length(); i++){
+            if (zona4.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona5.length(); i++){
+            if (zona5.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona6.length(); i++){
+            if (zona6.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        for (int i = 0; i<zona7.length(); i++){
+            if (zona7.charAt(i) == dinosaurio){
+                cantidad_de_dinosaurios = cantidad_de_dinosaurios + 1;
+            }
+        }
+        return cantidad_de_dinosaurios;
+    }
+    
+    public int CalculadorDePuntos1(){
         int puntos = 0;
-        
-        for (int i = 0; i<=zona1.length(); i++){
-            if (zona1.charAt(i-1) == zona1.charAt(i)){
-                contador = contador +1;
-            }
-            else {
-                verificacion = false;
-                break;
-            }
+        //zona1
+        if (zona1_1.length() == 1){
+            puntos = puntos + 2;
+        }
+        else if (zona1_1.length() == 2){
+            puntos = puntos + 4;
+        }
+        else if (zona1_1.length() == 3){
+            puntos = puntos + 8;
+        }
+        else if (zona1_1.length() == 4){
+            puntos = puntos + 12;
+        }
+        else if (zona1_1.length() == 5){
+            puntos = puntos + 18;
+        }
+        else if (zona1_1.length() == 6){
+            puntos = puntos + 24;
         }
         
-        if (verificacion == true){
-            if (contador == 0){
-                puntos = 0;
-            }
-            if (contador == 1){
-                puntos = puntos + 2;
-            }
-            if (contador == 2){
-                puntos = puntos + 4;
-            }
-            if (contador == 3){
-                puntos = puntos + 8;
-            }
-            if (contador == 4){
-                puntos = puntos + 12;
-            }
-            if (contador == 5){
-                puntos = puntos + 18;
-            }
-            if (contador == 6){
-                puntos = puntos + 24;
-            }
-            else {
-                System.out.println("Hay dinosaurios de más en la zona 1");
-            }
+        //zona2
+        if (zona2_1.length() == 1){
+            puntos = puntos + 1;
         }
-        else {
-            System.out.println("Hay dinosaurios diferentes en la zona 1");
+        else if (zona2_1.length() == 2){
+            puntos = puntos + 3;
         }
+        else if (zona2_1.length() == 3){
+            puntos = puntos + 6;
+        }
+        else if (zona2_1.length() == 4){
+            puntos = puntos + 10;
+        }
+        else if (zona2_1.length() == 5){
+            puntos = puntos + 15;
+        }
+        else if (zona2_1.length() == 6){
+            puntos = puntos + 21;
+        }
+        
+        //zona3
+        
+        //pradera del amor. (recuerde llenarlo también en el método para calcular puntos jugador 2)
+        
+        //zona4
+        if (zona4_1.length() == 3){
+            puntos = puntos + 7;
+        }
+        
+        //zona5
+        char dino_rey = zona5_1.charAt(0);
+        int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
+        int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
+        if (dino_jugador1>=dino_jugador2){
+            puntos = puntos + 7;
+        }
+        
+        //zona6
+        char dino_solitario = zona6_1.charAt(0);
+        int cantidad_de_iguales = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_solitario);
+        if (cantidad_de_iguales == 1){
+            puntos = puntos + 7;
+        }
+        
+        //zona7
+        int cantidad_rio = zona7_1.length();
+        puntos = puntos + (cantidad_rio);
+        
+        return puntos;
+    }
+    
+    public int CalculadorDePuntos2(){
+        int puntos = 0;
+        //zona1
+        if (zona1_2.length() == 1){
+            puntos = puntos + 2;
+        }
+        else if (zona1_2.length() == 2){
+            puntos = puntos + 4;
+        }
+        else if (zona1_2.length() == 3){
+            puntos = puntos + 8;
+        }
+        else if (zona1_2.length() == 4){
+            puntos = puntos + 12;
+        }
+        else if (zona1_2.length() == 5){
+            puntos = puntos + 18;
+        }
+        else if (zona1_2.length() == 6){
+            puntos = puntos + 24;
+        }
+        
+        //zona2
+        if (zona2_2.length() == 1){
+            puntos = puntos + 1;
+        }
+        else if (zona2_2.length() == 2){
+            puntos = puntos + 3;
+        }
+        else if (zona2_2.length() == 3){
+            puntos = puntos + 6;
+        }
+        else if (zona2_2.length() == 4){
+            puntos = puntos + 10;
+        }
+        else if (zona2_2.length() == 5){
+            puntos = puntos + 15;
+        }
+        else if (zona2_2.length() == 6){
+            puntos = puntos + 21;
+        }
+        
+        //zona3
+        
+        //pradera del amor. (recuerde llenarlo también en el método para calcular puntos jugador 1)
+        
+        //zona4
+        if (zona4_2.length() == 3){
+            puntos = puntos + 7;
+        }
+        
+        //zona5
+        char dino_rey = zona5_2.charAt(0);
+        int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
+        int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
+        if (dino_jugador2>=dino_jugador1){
+            puntos = puntos + 7;
+        }
+        
+        //zona6
+        char dino_solitario = zona6_2.charAt(0);
+        int cantidad_de_iguales = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_solitario);
+        if (cantidad_de_iguales == 1){
+            puntos = puntos + 7;
+        }
+        
+        //zona7
+        int cantidad_rio = zona7_2.length();
+        puntos = puntos + (cantidad_rio);
+        
         return puntos;
     }
 } 
-        char dino_colocado = in.next().charAt(0);
-        System.out.println("¿En cuál zona lo desea colocar? ");
-        int numero_de_zona = in.nextInt();
-        String dino_nuevo = "" + numero_de_zona + dino_colocado;
-        return dino_nuevo;
-    }
-}
