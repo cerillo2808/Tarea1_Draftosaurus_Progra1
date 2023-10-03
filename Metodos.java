@@ -27,6 +27,8 @@ public class Metodos{
     
     //Sirve para conseguir el dinosaurio ingresado
     public static String ConseguidorDeDinosaurio(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, String baraja){
+        char dino = '\0';
+        char zona = '\0';
         System.out.println("(1) Bosque de la semejanza: [" + zona1 + "]");
         System.out.println("(2) Prado de la diferencia: [" + zona2 + "]");
         System.out.println("(3) Pradera del amor: [" + zona3 + "]");
@@ -35,131 +37,131 @@ public class Metodos{
         System.out.println("(6) Isla solitaria: [" + zona6 + "]");
         System.out.println("(7) Rio: [" + zona7 + "]");
         System.out.println("Estos son sus dinosaurios: " + baraja);
-        char dino = PreguntarDinosaurio(baraja);
-        char zona = PreguntarZona(zona1, zona2, zona3, zona4, zona5, zona6, zona7, dino);
+        dino = PreguntarDinosaurio(baraja);
+        zona = PreguntarZona(zona1, zona2, zona3, zona4, zona5, zona6, zona7, dino);
         String DinoNuevo = "" + dino + zona;
         return DinoNuevo;
     }
     
     public static char PreguntarZona(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, char dino){
         Scanner in = new Scanner (System.in);
-        boolean continuar = false;
-        int entrada = 0;
+        int continuar = 0;
+        String entrada = "";
         do {
+            continuar = 0;
             System.out.println("¿En cuál zona lo desea colocar?: ");
-            try {
-                entrada = in.nextInt();
-                if (entrada == 1){
-                    if (zona1.length() == 0){
-                        continuar = false;
-                    }
-                    else {
-                        if (zona1.length()>=6){
-                            System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
-                            continuar = true;
-                        }
-                        else {
-                            if (zona1.charAt(0) == dino){
-                                continuar = false;
-                            }
-                            else {
-                                System.out.println("Entrada inválida. El dinosaurio tiene que ser igual a los otros en la zona");
-                                continuar = true;
-                            }
-                        }
-                    }
-                }
-                else if (entrada == 2){
-                    if (zona2.length()>=6){
-                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
-                        continuar = true;
-                    }
-                    else {
-                        for (int i = 0; i<zona2.length(); i++){
-                            if (zona2.charAt(i)==dino){
-                                System.out.println("Entrada inválida. El dinosaurio no puede ser igual a los otros en la zona");
-                                continuar = true;
-                            }
-                        }
-                        continuar = false;
-                    }
-                }
-                else if (entrada == 3){
-                    if (zona3.length() > 6){
-                        continuar = false;
-                    }
-                    else {
-                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
-                        continuar = true;
-                    }
-                }
-                else if (entrada == 4){
-                    if (zona4.length() > 3){
-                        continuar = false;
-                    }
-                    else {
-                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
-                        continuar = true;
-                    }
-                }
-                else if (entrada == 5){
-                    if (zona5.length() == 0){
-                        continuar = false;
-                    }
-                    else {
-                        System.out.println("Entrada inválida. Ya hay un dinosaurio.");
-                        continuar = true;
-                    }
-                }
-                else if (entrada == 6){
-                    if (zona6.length() == 0){
-                        continuar = false;
-                    }
-                    else {
-                        System.out.println("Entrada inválida. Ya hay un dinosaurio.");
-                        continuar = true;
-                    }
-                }
-                else if (entrada == 7){
-                    continuar = false;
+            entrada = in.nextLine();
+            if (entrada.equals("1")){
+                if (zona1.length() == 0){
+                    continuar = 0;
                 }
                 else {
-                    System.out.println("Entrada inválida. Ingrese una zona válida");
-                    continuar = true;
+                    if (zona1.length()>=6){
+                        System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                        continuar = continuar +1;
+                    }
+                    else {
+                        if (zona1.charAt(0) == dino){
+                            continuar = 0;
+                        }
+                        else {
+                            System.out.println("Entrada inválida. El dinosaurio tiene que ser igual a los otros en la zona");
+                            continuar = continuar +1;
+                        }
+                    }
                 }
-            } catch (InputMismatchException error){
-                System.out.println("Entrada inválida. Ingrese un número");
-                continuar = true;
             }
-        } while (continuar = true);
-        char devolver = (char) entrada;
-        return devolver;
+            else if (entrada.equals("2")){
+                if (zona2.length()>=6){
+                    System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                    continuar = continuar +1;
+                }
+                else {
+                    continuar = 0;
+                    for (int i = 0; i<zona2.length(); i++){
+                        if (zona2.charAt(i)==dino){
+                            System.out.println("Entrada inválida. El dinosaurio no puede ser igual a los otros en la zona");
+                            continuar = continuar +1;
+                        }
+                    }
+                }
+            }
+            else if (entrada.equals("3")){
+                if (zona3.length() < 6){
+                    continuar = 0;
+                }
+                else {
+                    System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                    continuar = continuar +1;
+                }
+            }
+            else if (entrada.equals("4")){
+                if (zona4.length() < 3){
+                    continuar = 0;
+                }
+                else {
+                    System.out.println("Entrada inválida. Ya no se pueden poner más dinosaurios en la zona");
+                    continuar = continuar +1;
+                }
+            }
+            else if (entrada.equals("5")){
+                if (zona5.length() == 0){
+                    continuar = 0;
+                }
+                else {
+                    System.out.println("Entrada inválida. Ya hay un dinosaurio.");
+                    continuar = continuar +1;
+                }
+            }
+            else if (entrada.equals("6")){
+                if (zona6.length() == 0){
+                    continuar = 0;
+                }
+                else {
+                    System.out.println("Entrada inválida. Ya hay un dinosaurio.");
+                    continuar = continuar +1;
+                }
+            }
+            else if (entrada.equals("7")){
+                continuar = 0;
+            }
+            else {
+                System.out.println("Entrada inválida. Ingrese una zona válida");
+                continuar = continuar +1;
+            }
+        } while (continuar > 0);
+        return entrada.charAt(0);
     }
     
     public static char PreguntarDinosaurio(String baraja){
         Scanner in = new Scanner (System.in);
-        boolean continuar = false;
+        int continuar = 0;
         String entrada = "";
         do{
+            continuar = 0;
             System.out.println("¿Cuál desea colocar?: ");
             entrada = in.nextLine();
             if (entrada.length()>1){
                 System.out.println("Entrada inválida. Ingrese sólo un dinosaurio.");
-                continuar = true;
+                continuar = continuar +1;
             }
             else if (entrada.length()<1){
                 System.out.println("Entrada inválida. Ingrese algún dinosaurio.");
-                continuar = true;
+                continuar = continuar +1;
             }
-            else if (entrada.length()==1){
+            else {
                 for (int i = 0; i<baraja.length(); i++){
                     if (baraja.charAt(i)==entrada.charAt(0)){
-                        continuar = false;
+                        continuar = 0;
                         break;
                     }
+                    continuar = continuar +1;
+                }
+                if (continuar > 0){
+                    System.out.println("Entrada inválida. Ingrese un dinosaurio de su baraja");
                 }
             }
-        } while (continuar = true);
+        } while (continuar > 0);
         char dinosaurio = entrada.charAt(0);
         return dinosaurio;
     }
