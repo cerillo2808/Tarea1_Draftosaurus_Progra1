@@ -440,6 +440,10 @@ public class Metodos{
         //zona7
         int cantidad_rio = zona7_1.length();
         puntos = puntos + (cantidad_rio);
+        
+        //T-Rex
+        int cantidad_de_trex = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, 't');
+        puntos = puntos + (cantidad_de_trex);
 
         return puntos;
     }
@@ -516,6 +520,10 @@ public class Metodos{
         //zona7
         int cantidad_rio = zona7_2.length();
         puntos = puntos + (cantidad_rio);
+        
+        //T-Rex
+        int cantidad_de_trex = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, 't');
+        puntos = puntos + (cantidad_de_trex);
 
         return puntos;
     }
