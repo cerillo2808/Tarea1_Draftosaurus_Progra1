@@ -421,20 +421,22 @@ public class Metodos{
         }
 
         //zona5
-        char dino_rey = zona5_1.charAt(0);
-        int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
-        int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
-        if (dino_jugador1>=dino_jugador2){
-            puntos = puntos + 7;
+            if (zona5_1.length()!=0){
+            char dino_rey = zona5_1.charAt(0);
+            int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
+            int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
+            if (dino_jugador1>=dino_jugador2){
+                puntos = puntos + 7;
+            }
         }
-
         //zona6
-        char dino_solitario = zona6_1.charAt(0);
-        int cantidad_de_iguales = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_solitario);
-        if (cantidad_de_iguales == 1){
-            puntos = puntos + 7;
+            if (zona6_1.length()!=0){
+                char dino_solitario = zona6_1.charAt(0);
+                int cantidad_de_iguales = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_solitario);
+                if (cantidad_de_iguales == 1){
+                    puntos = puntos + 7;
+                }
         }
-
         //zona7
         int cantidad_rio = zona7_1.length();
         puntos = puntos + (cantidad_rio);
@@ -494,18 +496,21 @@ public class Metodos{
         }
 
         //zona5
-        char dino_rey = zona5_2.charAt(0);
-        int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
-        int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
-        if (dino_jugador2>=dino_jugador1){
-            puntos = puntos + 7;
-        }
-
+        if(zona5_2.length()!=0){
+            char dino_rey = zona5_2.charAt(0);
+            int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
+            int dino_jugador2 = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_rey);
+            if (dino_jugador2>=dino_jugador1){
+                puntos = puntos + 7;
+            }
+         }
         //zona6
-        char dino_solitario = zona6_2.charAt(0);
-        int cantidad_de_iguales = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_solitario);
-        if (cantidad_de_iguales == 1){
-            puntos = puntos + 7;
+        if (zona6_2.length()!=0){
+            char dino_solitario = zona6_2.charAt(0);
+            int cantidad_de_iguales = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_solitario);
+            if (cantidad_de_iguales == 1){
+                puntos = puntos + 7;
+            }
         }
 
         //zona7
