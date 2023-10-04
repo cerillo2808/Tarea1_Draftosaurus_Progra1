@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Metodos{
-    
+
     //Variable Inicial
     String bolsa_de_dinosaurios = "ttttttttvvvvvvvvaaaaaaaabbbbbbbbddddddddssssssss";
 
@@ -24,7 +24,7 @@ public class Metodos{
         }
         return letrasSeleccionadas;
     }
-    
+
     //Sirve para conseguir el dinosaurio ingresado
     public static String ConseguidorDeDinosaurio(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, String baraja){
         char dino = '\0';
@@ -42,7 +42,7 @@ public class Metodos{
         String DinoNuevo = "" + dino + zona;
         return DinoNuevo;
     }
-    
+
     public static char PreguntarZona(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, char dino){
         Scanner in = new Scanner (System.in);
         int continuar = 0;
@@ -132,7 +132,7 @@ public class Metodos{
         } while (continuar > 0);
         return entrada.charAt(0);
     }
-    
+
     public static char PreguntarDinosaurio(String baraja){
         Scanner in = new Scanner (System.in);
         int continuar = 0;
@@ -165,27 +165,27 @@ public class Metodos{
         char dinosaurio = entrada.charAt(0);
         return dinosaurio;
     }
-    
+
     //Más variables
-        //_1 significa jugador 1
-        String zona1_1 = "";
-        String zona2_1 = "";
-        String zona3_1 = "";
-        String zona4_1 = "";
-        String zona5_1 = "";
-        String zona6_1 = "";
-        String zona7_1 = "";
-        
-        //variables del jugador 2
-        String zona1_2 = "";
-        String zona2_2 = "";
-        String zona3_2 = "";
-        String zona4_2 = "";
-        String zona5_2 = "";
-        String zona6_2 = "";
-        String zona7_2 = "";
-    
-        //corre una ronda
+    //_1 significa jugador 1
+    String zona1_1 = "";
+    String zona2_1 = "";
+    String zona3_1 = "";
+    String zona4_1 = "";
+    String zona5_1 = "";
+    String zona6_1 = "";
+    String zona7_1 = "";
+
+    //variables del jugador 2
+    String zona1_2 = "";
+    String zona2_2 = "";
+    String zona3_2 = "";
+    String zona4_2 = "";
+    String zona5_2 = "";
+    String zona6_2 = "";
+    String zona7_2 = "";
+
+    //corre una ronda
     public void Ronda(){
         String baraja1 = SeleccionadorDeDinosaurios();
         String baraja2 = SeleccionadorDeDinosaurios();
@@ -205,7 +205,7 @@ public class Metodos{
             }
         }
     }
-    
+
     //sirve para poner el tablero correcto de cada jugador
     public char TurnadorDeEnunciado (int i, String baraja1, String baraja2){
         String DinoNuevo = "";
@@ -217,7 +217,7 @@ public class Metodos{
             DinoNuevo = ConseguidorDeDinosaurio(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, baraja1);
             char LetraDino = Concatenar1(DinoNuevo);
             return LetraDino;
-            }
+        }
         else {
             System.out.println("====== Es el turno de jugador 2 ======");
             if (i==3||i==7||i==11){
@@ -226,9 +226,9 @@ public class Metodos{
             DinoNuevo = ConseguidorDeDinosaurio(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, baraja2);
             char LetraDino = Concatenar2(DinoNuevo);
             return LetraDino;
-            }
+        }
     }
-    
+
     //sirve para eliminar el dino de la baraja después de ser ingresado
     public static String EliminarDino (String baraja1, char LetraDino){
         for (int i = 0; i<baraja1.length(); i++){
@@ -239,7 +239,7 @@ public class Metodos{
         }
         return baraja1;
     }
-    
+
     //sirve para intercambiar las barajas
     public static String Drafting(String baraja1, String baraja2){
         String temporal = "";
@@ -248,12 +248,12 @@ public class Metodos{
         baraja1 = temporal;
         return baraja1;
     }
-    
+
     //sirve para agregar el dinosaurio ingresado a la zona correcta en el tablero de jugador 1
     public char Concatenar1 (String DinoNuevo){
         char dino = DinoNuevo.charAt(0);
         char zona = DinoNuevo.charAt(1);
-        
+
         if (zona == '1'){
             zona1_1 = zona1_1 + dino;
         }
@@ -277,12 +277,12 @@ public class Metodos{
         }
         return dino;
     }
-    
+
     //sirve para agregar el dinosaurio a la zona correcta en el tablero de jugador 2
     public char Concatenar2 (String DinoNuevo){
         char dino = DinoNuevo.charAt(0);
         char zona = DinoNuevo.charAt(1);
-        
+
         if (zona == '1'){
             zona1_2 = zona1_2 + dino;
         }
@@ -306,7 +306,7 @@ public class Metodos{
         }
         return dino;
     }
-    
+
     //sirve para mostrar el tablero final de jugador 1
     public void MostradorDeTableroFinal1(){
         System.out.println("(1) Bosque de la semejanza: [" + zona1_1 + "]");
@@ -317,7 +317,7 @@ public class Metodos{
         System.out.println("(6) Isla solitaria: [" + zona6_1 + "]");
         System.out.println("(7) Rio: [" + zona7_1 + "]");
     }
-    
+
     //sirve para mostrar el tablero final de jugador 2
     public void MostradorDeTableroFinal2(){
         System.out.println("(1) Bosque de la semejanza: [" + zona1_2 + "]");
@@ -328,7 +328,7 @@ public class Metodos{
         System.out.println("(6) Isla solitaria: [" + zona6_2 + "]");
         System.out.println("(7) Rio: [" + zona7_2 + "]");
     }
-    
+
     public static int ContadorDeDinosaurios(String zona1, String zona2, String zona3, String zona4, String zona5, String zona6, String zona7, char dinosaurio){
         int cantidad_de_dinosaurios = 0;
         for (int i = 0; i<zona1.length(); i++){
@@ -368,7 +368,7 @@ public class Metodos{
         }
         return cantidad_de_dinosaurios;
     }
-    
+
     public int CalculadorDePuntos1(){
         int puntos = 0;
         //zona1
@@ -390,7 +390,7 @@ public class Metodos{
         else if (zona1_1.length() == 6){
             puntos = puntos + 24;
         }
-        
+
         //zona2
         if (zona2_1.length() == 1){
             puntos = puntos + 1;
@@ -410,16 +410,16 @@ public class Metodos{
         else if (zona2_1.length() == 6){
             puntos = puntos + 21;
         }
-        
+
         //zona3
-        
-        //pradera del amor. (recuerde llenarlo también en el método para calcular puntos jugador 2)
-        
+
+       puntos += praderaAmor(zona3_1);
+
         //zona4
         if (zona4_1.length() == 3){
             puntos = puntos + 7;
         }
-        
+
         //zona5
         char dino_rey = zona5_1.charAt(0);
         int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
@@ -427,21 +427,21 @@ public class Metodos{
         if (dino_jugador1>=dino_jugador2){
             puntos = puntos + 7;
         }
-        
+
         //zona6
         char dino_solitario = zona6_1.charAt(0);
         int cantidad_de_iguales = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_solitario);
         if (cantidad_de_iguales == 1){
             puntos = puntos + 7;
         }
-        
+
         //zona7
         int cantidad_rio = zona7_1.length();
         puntos = puntos + (cantidad_rio);
-        
+
         return puntos;
     }
-    
+
     public int CalculadorDePuntos2(){
         int puntos = 0;
         //zona1
@@ -463,7 +463,7 @@ public class Metodos{
         else if (zona1_2.length() == 6){
             puntos = puntos + 24;
         }
-        
+
         //zona2
         if (zona2_2.length() == 1){
             puntos = puntos + 1;
@@ -483,16 +483,16 @@ public class Metodos{
         else if (zona2_2.length() == 6){
             puntos = puntos + 21;
         }
-        
+
         //zona3
-        
-        //pradera del amor. (recuerde llenarlo también en el método para calcular puntos jugador 1)
-        
+
+        puntos += praderaAmor(zona3_2);
+
         //zona4
         if (zona4_2.length() == 3){
             puntos = puntos + 7;
         }
-        
+
         //zona5
         char dino_rey = zona5_2.charAt(0);
         int dino_jugador1 = ContadorDeDinosaurios(zona1_1, zona2_1, zona3_1, zona4_1, zona5_1, zona6_1, zona7_1, dino_rey);
@@ -500,18 +500,73 @@ public class Metodos{
         if (dino_jugador2>=dino_jugador1){
             puntos = puntos + 7;
         }
-        
+
         //zona6
         char dino_solitario = zona6_2.charAt(0);
         int cantidad_de_iguales = ContadorDeDinosaurios(zona1_2, zona2_2, zona3_2, zona4_2, zona5_2, zona6_2, zona7_2, dino_solitario);
         if (cantidad_de_iguales == 1){
             puntos = puntos + 7;
         }
-        
+
         //zona7
         int cantidad_rio = zona7_2.length();
         puntos = puntos + (cantidad_rio);
-        
+
         return puntos;
     }
-} 
+
+    //Método para calcular los puntos en pradera del amor
+    public static int praderaAmor(String cadena) {
+
+        int puntos = 0;
+
+        //Variables
+        int cantT = 0;
+        int cantV = 0;
+        int cantA = 0;
+        int cantD = 0;
+        int cantB = 0;
+        int cantS = 0;
+
+        //Contar Cantidad de Dinosaurios por especie
+        for (int i = 0; i < cadena.length(); i++) {
+            char dinoActual = cadena.charAt(i);
+            switch (dinoActual) {
+                case ('t'): {
+                    cantT++;
+                    break;
+                }
+                case ('v'): {
+                    cantV++;
+                    break;
+                }
+                case ('a'): {
+                    cantA++;
+                    break;
+                }
+                case ('d'): {
+                    cantD++;
+                    break;
+                }
+                case ('b'): {
+                    cantB++;
+                    break;
+                }
+                case ('s'): {
+                    cantS++;
+                    break;
+                }
+            }
+        }
+
+        puntos += (cantT / 2) * 5;
+        puntos += (cantV / 2) * 5;
+        puntos += (cantA / 2) * 5;
+        puntos += (cantD / 2) * 5;
+        puntos += (cantB / 2) * 5;
+        puntos += (cantS / 2) * 5;
+
+        return puntos;
+    }
+
+}
